@@ -137,20 +137,20 @@ public class JobController
 
     @DELETE
     @Path("{jobId}")
-    public Response deleteJob(@PathParam("jobId") int jobId) {
+    public void deleteJob(@PathParam("jobId") int jobId) {
 
         try {
             dao.deleteJob(jobId);
 
-            NewCookie cookie = (new NewCookie.Builder("username")).value("102").build();
-            URI uri = uriInfo.getAbsolutePathBuilder().path(jobId + "").build();
-            return Response
+           // NewCookie cookie = (new NewCookie.Builder("username")).value("102").build();
+          //  URI uri = uriInfo.getAbsolutePathBuilder().path(jobId + "").build();
+          //  return Response
 //                    .status(Response.Status.CREATED)
-                    .created(uri)
+              //      .created(uri)
 //                    .cookie(new NewCookie("username", "OOOOO"))
-                    .cookie(cookie)
-                    .header("Created by", "Wael")
-                    .build();
+                //    .cookie(cookie)
+                //    .header("Created by", "Wael")
+                 //   .build();
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -158,6 +158,7 @@ public class JobController
     }
 
     @POST
+    @Consumes ({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response insertJob(Jobs job) {
 
         try {
@@ -174,6 +175,22 @@ public class JobController
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @POST
+    @Consumes ({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response insertJob(Jobs job){
+        dao.insertJob(job);
+        NewCookie cookie = (new NewCookie.Builder("username")).value("100").build();
+        URI uri = uriInfo.getAbsolutePathBuilder().path(job.getJob_id() + "").build();
+        return Response
+                .created(uri)
+                .cookie(cookie)
+                .header("Created by", "Wael")
+                .build();
+    } catch (Exception e) {
+    throw new RuntimeException(e);
+}
+
     }
 
     @PUT
