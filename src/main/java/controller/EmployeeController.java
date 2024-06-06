@@ -2,6 +2,7 @@ package controller;
 
 import dao.EmployeeDAO;
 import jakarta.ws.rs.*;
+import models.Employee;
 import org.example.dao.EmployeeDAO;
 import org.example.models.Employee;
 
@@ -25,7 +26,7 @@ public class EmployeeController
     @Path("{employeeId}")
     public Employee getEmployee(@PathParam("employeeId") int employeeId) {
         try {
-            return employeeDAO.selectEmployee(employeeId);
+            return EmployeeDAO.selectEmployee(employeeId);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

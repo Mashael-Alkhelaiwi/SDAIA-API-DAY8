@@ -1,8 +1,13 @@
 package controller;
 
+import dao.JobDAO;
+import dto.JobDTO;
+import dto.JobFilter;
+import exceptions.DataNotFoundException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
+import models.Jobs;
 import org.example.dao.JobDAO;
 import org.example.dto.JobDTO;
 import org.example.dto.JobFilter;
