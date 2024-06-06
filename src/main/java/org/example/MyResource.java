@@ -1,6 +1,7 @@
 package org.example;
 
 
+import dto.EmployeeIdDto;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
@@ -38,5 +39,12 @@ public class MyResource {
         System.out.println(uriInfo.getQueryParameters().get("minSalary"));
 
         return "Got it! name: " + username + ", apikey: " + apikey;
+    }
+    @GET
+    @Path("{info}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getdate(@PathParam("info")EmployeeIdDto info){
+        return "Employee info : "+ info;
+
     }
 }
